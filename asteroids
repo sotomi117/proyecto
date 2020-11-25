@@ -120,69 +120,7 @@ function onMouseMove( event ) {
 mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 }
-/*
- var animate = function () {
-	requestAnimationFrame( animate );
 
-raycaster.setFromCamera(mousi, camera);
-
-stats.update();        
-
-//tiempo con enemigos
-
-tiempo++
-
- if (tiempo==10){
-
-
-console.log("aparece enemigo");
-
-asteroides.push(this.enemigo)
-
-tiempo=0
-
-
- }
-          
-//Raycast con disparo
-var tiempo2 = 0;
-
-var intersects = raycaster.intersectObjects(scene.children,true);
-
-//console.log(intersects.length);
-
-            if (a == 0) {
-				if(intersects[0]!=null){	
-				console.log(intersects[0].object.name);
-
-if (intersects[0].object.name == "enemigo") {
-
-					if (tiempo2==500){
-
-                    scene.remove(intersects[0].object)
-
-					a = 1;
-
-					console.log("golpea");
-
-					tiempo2=0;
-					
-					
-				}
-				
-                }
-			 }
-			}
-
-			
-	
-
-//score
-var myScore = 0;
-renderer.render(scene,camera);
-//effect.render( scene, camera);
-};
-*/
 var animate = function () {
 			requestAnimationFrame( animate );
 			

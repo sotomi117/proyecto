@@ -1,0 +1,202 @@
+<html>
+	<head>
+		<title>proyecto</title>
+		<style>
+			body { margin: 0; }
+			canvas { display: block; }
+		</style>
+	</head>
+	<body>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r119/three.min.js"></script>
+		
+		<script src="stats.min.js"></script>
+		<script src="StereoEffect.js"></script>
+		<script src="DeviceOrientationControls.js"></script>
+		<script src="inflate.min.js"></script>
+		<script src="fps.js"></script>
+		<script src="luz.js"></script>
+		<script src="controles.js"></script>
+		<script src="nave.js"></script>
+		<script src="enemigo.js"></script>
+		<script src="mira.js"></script>
+		
+		
+		
+		
+        <script>
+        var container;
+        container = document.createElement( 'div' );
+        document.body.appendChild( container );
+
+//renderer 
+
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			renderer.shadowMap.enabled = true;
+			document.body.appendChild( renderer.domElement );
+
+			var effect =new THREE.StereoEffect( renderer);
+			effect.setSize(window.innerWidth,window.innerHeight);
+
+//scene
+var scene = new THREE.Scene();
+				scene.background = new THREE.Color( 0x000000);
+			
+				
+
+//camara inicial  
+var camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+camera.position.set(-700,150,400);
+scene.add(camera);
+
+camera.lookAt(scene.position);
+
+
+//fps o stats 
+
+        container = document.createElement( 'div' );
+        document.body.appendChild( container );
+    var stats;
+    stats = new Stats();
+    stats.domElement.style.position = 'absolute';
+    stats.domElement.style.bottom = '0px';
+    stats.domElement.style.zIndex = 100;
+		container.appendChild( stats.dom );
+		
+
+//raycaster
+var m_mira=new Mira();
+var raycaster = new THREE.Raycaster();
+        var mouse = new THREE.Vector2();
+		var mousi = new THREE.Vector2();
+		
+
+		
+//luz
+var m_luz=new Luz();
+
+
+//controles
+var m_controles=new Controles();
+var controls = new THREE.DeviceOrientationControls( camera );
+
+//Nave
+var m_nave=new Nave();
+
+
+
+//array asteroide
+var asteroides=[];
+
+
+
+//Enemigos
+var tiempo = 0;
+var enemigos=[];
+			for(var i=0;i<20;i++){
+				var m_enemigo=new Enemigo();
+				//m_enemigo.sprite.name=i;
+				enemigos.push(m_enemigo);
+			}
+			
+
+
+		
+//disparo
+
+var a;
+window.addEventListener('mousedown',function(){
+	a = 0;
+}, false);
+
+
+
+//Animate 
+
+window.addEventListener( 'mousemove', onMouseMove, false );
+
+function onMouseMove( event ) {
+
+mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+}
+/*
+ var animate = function () {
+	requestAnimationFrame( animate );
+
+raycaster.setFromCamera(mousi, camera);
+
+stats.update();        
+
+//tiempo con enemigos
+
+tiempo++
+
+ if (tiempo==10){
+
+
+console.log("aparece enemigo");
+
+asteroides.push(this.enemigo)
+
+tiempo=0
+
+
+ }
+          
+//Raycast con disparo
+var tiempo2 = 0;
+
+var intersects = raycaster.intersectObjects(scene.children,true);
+
+//console.log(intersects.length);
+
+            if (a == 0) {
+				if(intersects[0]!=null){	
+				console.log(intersects[0].object.name);
+
+if (intersects[0].object.name == "enemigo") {
+
+					if (tiempo2==500){
+
+                    scene.remove(intersects[0].object)
+
+					a = 1;
+
+					console.log("golpea");
+
+					tiempo2=0;
+					
+					
+				}
+				
+                }
+			 }
+			}
+
+			
+	
+
+//score
+var myScore = 0;
+renderer.render(scene,camera);
+//effect.render( scene, camera);
+};
+*/
+var animate = function () {
+			requestAnimationFrame( animate );
+			
+				controls.update();
+				m_mira.actualizar();
+				effect.render( scene, camera );
+				renderer.render( scene);
+			};
+animate();
+
+
+
+</script>
+
+</body>
+</html>
+
